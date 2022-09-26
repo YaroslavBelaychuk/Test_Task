@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+    <h1>Register</h1>
+
+    <form method="POST" action="{{ url_for("auth.register") }}">
+        <dl>
+            {{ form.csrf_token }}
+            {{ render_field(form.login) }}
+            {{ render_field(form.password) }}
+            {{ render_field(form.password2) }}
+        </dl>
+        <p>{{ form.submit }}</p>
+        <p id="warning"></p>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        const login = document.querySelector('#login');
+        const warning = document.getElementById('warning');
+
+        login.addEventListener('change', (event) => {
+            if (event.target.value.length < 9) {
+                warning.textContent = "Too short login_manager";
+            } else {
+                warning.textContent = "";
+            }
+        });
+    </script>
+{% endblock %}

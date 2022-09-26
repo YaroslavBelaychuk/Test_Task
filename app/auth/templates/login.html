@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+    {{ super() }}
+    <h1>Register</h1>
+
+    <form method="POST" action="{{ url_for("auth.login") }}">
+        <dl>
+            {{ form.csrf_token }}
+            {{ render_field(form.login) }}
+            {{ render_field(form.password) }}
+        </dl>
+        <p>{{ form.submit }}</p>
+    </form>
+{% endblock %}

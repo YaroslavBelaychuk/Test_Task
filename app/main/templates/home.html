@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{ current_user }}
+    {% if current_user.is_authenticated %}
+        <div data-user="{{ current_user.id }}">
+            <span>Hi, {{ current_user.login }}!</span>
+            <a href="{{ url_for('main.secret', type=current_user.login | length - 6) }}">secret</a>
+        </div>
+    {% else %}
+        Forbidden
+    {% endif %}
+{% endblock %}

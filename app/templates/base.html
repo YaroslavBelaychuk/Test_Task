@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block styles %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% endblock %}
+</head>
+
+<body>
+    <nav class="main-menu">
+        <ul>
+           <li>Home</li>
+        </ul>
+
+        <ul id="auth-menu">
+            <li>
+                <a href="{{ url_for('auth.register') }}">Регистрация</a>
+                <a href="{{ url_for('auth.login') }}">Вход</a>
+            </li>
+        </ul>
+    </nav>
+    {% block content %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    {% endblock %}
+
+    {% block scripts %}
+
+    {% endblock %}
+</body>
+</html>
